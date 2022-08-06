@@ -23,7 +23,12 @@ const apiInfo= async()=>{
               pasos: e.analyzedInstructions[0] &&
               e.analyzedInstructions[0].steps &&
               e.analyzedInstructions[0].steps.map((step)=> step.step),
-              dietas: e.diets,
+              dieta: e.diets,
+              TipoDieta: e.diets.map(elemento => {
+                return (
+                  {Nombre: elemento}
+                )
+            }),
               image: e.image,
               createDB: false
 
@@ -179,7 +184,7 @@ router.post("/recipes", async (req,res)=>{
 
 router.get("/diets",async (req,res)=>{
    const infoApi= await apiInfo()
-   const diets= infoApi.map(el => el.dietas)
+   const diets= infoApi.map(el => el.dieta)
    
   let arrayConTodasLasDietas=[]
   for(let i=0; i< diets.length;i++){
@@ -199,12 +204,16 @@ router.get("/diets",async (req,res)=>{
    let dietaSinDuplicados= new Set(arrayConTodasLasDietas)
 
    let dietas= Array.from(dietaSinDuplicados)
-
+  dietas.forEach(el =>{
+      TipoDieta.findOrCreate({
+        where: {Nombre: el}
+      })
+  })
    
    
-  for(let i=0; i< dietas.length;i++){
+  /*for(let i=0; i< dietas.length;i++){
      await TipoDieta.create({Nombre:dietas[i]})
-  }
+  }*/
    
   /*let dieta=["Gluten Free","Ketogenic","Vegetarian","Lacto-Vegetarian","Ovo-Vegetarian","Vegan","Pescetarian","Paleo","Primal","Low FODMAP","Whole30"]
   

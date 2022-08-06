@@ -11,3 +11,11 @@ export function getRecipes(){
         )
     }
 }
+
+export function filterRecipesByDiet(payload){
+    console.log(payload)
+    return {
+        type : "FILTER_BY_DIET",
+        payload
+    }
+}
