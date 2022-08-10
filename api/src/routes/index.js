@@ -18,6 +18,7 @@ const apiInfo= async()=>{
          return {
               id: e.id,
               Nombre: e.title,
+              vegetarian: e.vegetarian,
               NivelHealth: e.healthScore,
               Resumen: e.summary.replace(/<[^>]*>/g,""),
               pasos: e.analyzedInstructions[0] &&
