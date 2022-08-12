@@ -2,8 +2,10 @@ import React from 'react'
 import { Recetas } from './Recetas'
 import { useState,useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import {getRecipes,filterRecipesByDiet} from "../actions/index"
+import {getRecipes,filterRecipesByDiet,orderByName} from "../actions/index"
 import { Paginacion } from './Paginacion'
+import { SearchBar } from './SearchBar'
+import { NavLink } from 'react-router-dom'
 
 export const Inicio = () => {
     const dispatch= useDispatch()
@@ -11,6 +13,8 @@ export const Inicio = () => {
 
     const[paginaActual, setPaginaActual]= useState(1)
     const[recetasPagina,setRecetasPagina]= useState(9)
+
+    const[orden,setOrden]= useState("")
 
     useEffect(()=>{
         dispatch(getRecipes())
@@ -33,12 +37,17 @@ export const Inicio = () => {
     function handleFilterDiets(e){
         dispatch(filterRecipesByDiet(e.target.value))
     }
+    function handleOrder(e){
+      dispatch(orderByName(e.target.value))
+      setOrden(e.target.value)
+    }
   return (
     <div>
+      <NavLink  to={"/crearReceta"}>Cargar nueva receta!</NavLink>
        <button onClick={e=>{handleClick(e)}}>cargar recetas</button>
        
        <div>
-          <select>
+          <select onChange={e => handleOrder(e)}>
               <option value="asc">ascendente</option>
               <option value="desc">descendente</option>
           </select>
@@ -57,11 +66,8 @@ export const Inicio = () => {
               <option value="vegetarian">vegetarian</option>
               
           </select>
-          <select>
-              <option value="todos">todos</option>
-              <option value="existentes">existentes</option>
-              <option value="creados">creados</option>
-          </select>
+          <SearchBar></SearchBar>
+          
           <Paginacion recetasPagina={recetasPagina} recipes={recipes.length} paginado={paginado}></Paginacion>
           {
            recetasActuales && recetasActuales.map(elemento =>{

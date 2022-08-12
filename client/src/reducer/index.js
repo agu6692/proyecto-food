@@ -1,6 +1,7 @@
 const initialState = {
     recetas:[],
-    recetasPersistentes:[]
+    recetasPersistentes:[],
+    dietas:[]
   };
 
 
@@ -13,6 +14,7 @@ const initialState = {
                 recetas: action.payload,
                 recetasPersistentes: action.payload
             }
+        
         case "FILTER_BY_DIET":
             const allRecipes = state.recetasPersistentes
             
@@ -56,6 +58,44 @@ const initialState = {
                 recetas: recetasFiltradas
                 
             }
+            case "ORDER_BY_NAME":
+                let ordenados= action.payload === "asc" ?
+                   state.recetas.sort(function (a,b){
+                        if(a.Nombre > b.Nombre){
+                            return 1;
+                        }
+                        if(b.Nombre > a.Nombre){
+                            return -1;
+                        }
+                        return 0;
+                   }) : 
+                   state.recetas.sort(function(a,b){
+                    if(a.Nombre > b.Nombre){
+                        return -1;
+                    }
+                    if(b.Nombre > a.Nombre){
+                        return 1;
+                    }
+                    return 0;
+                   })
+                return {
+                    ...state,
+                    recetas: ordenados
+                }
+            case "GET_BY_NAME":
+                return {
+                    ...state,
+                    recetas: action.payload
+                }
+            case "POST_RECETA":
+                return{
+                       ...state
+                }
+            case "GET_DIETS":
+                return{
+                    ...state,
+                    dietas: action.payload
+                }
         default:
             return state;
     }

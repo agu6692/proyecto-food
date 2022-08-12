@@ -142,7 +142,7 @@ router.get("/recipes/:idReceta",async (req,res)=>{
 
 
 router.post("/recipes", async (req,res)=>{
-  let {Nombre,Resumen,NivelHealth,pasos,createDB,dieta}= req.body
+  let {Nombre,Resumen,NivelHealth,pasos,dieta}= req.body
   console.log(req.body)
 
   if(!Nombre || !Resumen ){
@@ -159,7 +159,7 @@ router.post("/recipes", async (req,res)=>{
          Resumen,
          NivelHealth,
          pasos,
-         createDB
+         createDB:true
      })
 
      const dietas= await TipoDieta.findAll({
