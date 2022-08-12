@@ -88,3 +88,20 @@ export function postReceta(payload){
         }
     }
 }
+
+export function getRecipesID(id){
+    return async function(dispatch){
+        try{
+            let response = await axios.get("http://localhost:3001/recipes/"+id)
+            return dispatch(
+                {
+                    type: "GET_RECIPES_ID",
+                    payload: response.data
+                }
+            )
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+}

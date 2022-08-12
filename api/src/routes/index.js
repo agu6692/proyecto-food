@@ -102,7 +102,7 @@ router.get("/recipes",async(req,res)=>{
 
 
   }catch(e){
-    return res.status(500).send("error al traer los datos")
+    return res.status(500).send("ERROR")
   }
   
   
@@ -117,22 +117,26 @@ router.get("/recipes",async(req,res)=>{
 
 router.get("/recipes/:idReceta",async (req,res)=>{
   let id= req.params.idReceta
+  try{
+
+    let info= await apiInfo()
+    let infoDb= await dbInfo()
+    let infoAlFront= info.concat(infoDb)
   
-  let info= await apiInfo()
-  let infoDb= await dbInfo()
-  let infoAlFront= info.concat(infoDb)
-
+    
   
-
-  if(id){
-    let receta= infoAlFront.filter(elemento => elemento.id == id)
-    console.log(receta)
-    if(receta.length){
-      return res.json(receta)
-
-    }else{
-      return res.status(500).send("no hay ninguna receta con ese id")
+    if(id){
+      let receta= infoAlFront.filter(elemento => elemento.id == id)
+      console.log(receta)
+      if(receta.length){
+        return res.json(receta)
+  
+      }else{
+        return res.status(500).send("no hay ninguna receta con ese id")
+      }
     }
+  }catch(e){
+    res.status(500).send("ERROR")
   }
   
 
@@ -177,54 +181,53 @@ router.post("/recipes", async (req,res)=>{
      
 
   }catch(e){
-     res.status(404).send("error cargando receta")
+     res.status(404).send("ERROR AL CARGAR RECETA")
   }
 })
 
 
 
 router.get("/diets",async (req,res)=>{
-   const infoApi= await apiInfo()
-   const diets= infoApi.map(el => el.dieta)
    
-  let arrayConTodasLasDietas=[]
-  for(let i=0; i< diets.length;i++){
-    if(diets[i]!== []){
+  try{
 
-      for(let j=0; j< diets[i].length;j++){
-        arrayConTodasLasDietas.push(diets[i][j])
-      }  
 
+    const infoApi= await apiInfo()
+     const diets= infoApi.map(el => el.dieta)
+     
+    let arrayConTodasLasDietas=[]
+    for(let i=0; i< diets.length;i++){
+      if(diets[i]!== []){
+  
+        for(let j=0; j< diets[i].length;j++){
+          arrayConTodasLasDietas.push(diets[i][j])
+        }  
+  
+      }
     }
+    
+     
+     
+     arrayConTodasLasDietas.push("vegetarian")
+  
+     let dietaSinDuplicados= new Set(arrayConTodasLasDietas)
+  
+     let dietas= Array.from(dietaSinDuplicados)
+    dietas.forEach(el =>{
+        TipoDieta.findOrCreate({
+          where: {Nombre: el}
+        })
+    })
+     
+     
+    
+  
+     const dietasDb= await TipoDieta.findAll();
+  
+     res.send(dietasDb)
+  }catch(e){
+    res.status(500).send("ERROR")
   }
-  
-   
-   
-   arrayConTodasLasDietas.push("vegetarian")
-
-   let dietaSinDuplicados= new Set(arrayConTodasLasDietas)
-
-   let dietas= Array.from(dietaSinDuplicados)
-  dietas.forEach(el =>{
-      TipoDieta.findOrCreate({
-        where: {Nombre: el}
-      })
-  })
-   
-   
-  /*for(let i=0; i< dietas.length;i++){
-     await TipoDieta.create({Nombre:dietas[i]})
-  }*/
-   
-  /*let dieta=["Gluten Free","Ketogenic","Vegetarian","Lacto-Vegetarian","Ovo-Vegetarian","Vegan","Pescetarian","Paleo","Primal","Low FODMAP","Whole30"]
-  
-  for(let i=0; i< dieta.length;i++){
-     await TipoDieta.create({Nombre:dieta[i]})
-  }*/
-
-   const dietasDb= await TipoDieta.findAll();
-
-   res.send(dietasDb)
 })
 
 

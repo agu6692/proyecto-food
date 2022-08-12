@@ -1,7 +1,8 @@
 const initialState = {
     recetas:[],
     recetasPersistentes:[],
-    dietas:[]
+    dietas:[],
+    detalle:[]
   };
 
 
@@ -58,6 +59,11 @@ const initialState = {
                 recetas: recetasFiltradas
                 
             }
+            case "GET_RECIPES_ID":
+                return{
+                  ...state,
+                  detalle:action.payload
+                }
             case "ORDER_BY_NAME":
                 let ordenados= action.payload === "asc" ?
                    state.recetas.sort(function (a,b){

@@ -12,13 +12,19 @@ export const Inicio = () => {
     const recipes= useSelector((state)=> state.recetas)
 
     const[paginaActual, setPaginaActual]= useState(1)
-    const[recetasPagina,setRecetasPagina]= useState(9)
+    const[recetasPagina]= useState(9)
 
     const[orden,setOrden]= useState("")
 
     useEffect(()=>{
+      
+      if(recipes.length < 1){
         dispatch(getRecipes())
-    },[])
+
+      }
+  },[])
+
+    
 
     function handleClick(e){
       e.preventDefault();
@@ -43,8 +49,8 @@ export const Inicio = () => {
     }
   return (
     <div>
-      <NavLink  to={"/crearReceta"}>Cargar nueva receta!</NavLink>
-       <button onClick={e=>{handleClick(e)}}>cargar recetas</button>
+       <NavLink  to={"/crearReceta"}>Cargar nueva receta!</NavLink>
+       <button onClick={e=>{handleClick(e)}}>Limpiar filtros</button>
        
        <div>
           <select onChange={e => handleOrder(e)}>
@@ -67,13 +73,29 @@ export const Inicio = () => {
               
           </select>
           <SearchBar></SearchBar>
+       </div>
+       <div>
           
           <Paginacion recetasPagina={recetasPagina} recipes={recipes.length} paginado={paginado}></Paginacion>
           {
            recetasActuales && recetasActuales.map(elemento =>{
+               if(elemento.createDB===true){
+                elemento.image="/receta.png"
+               }
             return (
 
-                <Recetas key={elemento.id} name={elemento.Nombre}></Recetas>
+                <Recetas 
+                key={elemento.id} 
+                id={elemento.id}
+                name={elemento.Nombre} 
+                image={elemento.image}
+                
+                tipoDieta={elemento.TipoDieta}
+                
+
+              
+                
+                ></Recetas>
             )
            })
           }

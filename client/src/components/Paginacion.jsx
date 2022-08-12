@@ -8,7 +8,7 @@ export const Paginacion = ({recetasPagina,recipes,paginado}) => {
     console.log(nuemeroDePaginas)
   return (
     <div>
-            <h1>Paginado</h1>
+            
         <ul>
             {nuemeroDePaginas.map(numero =>{
                 return (

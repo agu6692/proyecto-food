@@ -1,6 +1,6 @@
 import React from 'react'
 import {searchByName} from "../actions/index"
-import { useSelector,useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 
 export const SearchBar = () => {
