@@ -64,6 +64,21 @@ const initialState = {
                   ...state,
                   detalle:action.payload
                 }
+            case "ORDER_BY_SALUDABLE":
+                let ordenamiento=[]
+                if(action.payload==="noSaludable"){
+                   ordenamiento= state.recetas.sort(((a, b) => a.NivelHealth - b.NivelHealth));
+
+                    
+                }else if(action.payload==="saludable"){
+                    ordenamiento= state.recetas.sort(((a, b) => b.NivelHealth - a.NivelHealth));
+                }
+                    
+                return{
+                  ...state, 
+                  recetas: ordenamiento 
+                }
+            
             case "ORDER_BY_NAME":
                 let ordenados= action.payload === "asc" ?
                    state.recetas.sort(function (a,b){

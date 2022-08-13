@@ -1,13 +1,14 @@
 import React from 'react'
+import style from "../estilos/paginacion.module.css"
 
 export const Paginacion = ({recetasPagina,recipes,paginado}) => {
     const nuemeroDePaginas= []
     for(let i =1;i <= Math.ceil(recipes/recetasPagina);i++){
         nuemeroDePaginas.push(i)
     }
-    console.log(nuemeroDePaginas)
+    
   return (
-    <div>
+    <div className={style.paginado}>
             
         <ul>
             {nuemeroDePaginas.map(numero =>{

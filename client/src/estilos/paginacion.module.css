@@ -1,0 +1,31 @@
+.paginado{
+    text-align:center
+}
+
+.paginado ul{
+    display: inline-block;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.paginado ul li{
+    display: inline;
+}
+.paginado ul li a{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid rgb(180, 136, 78);
+    margin: 3px;
+}
+.paginado ul li a.active{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.paginado ul li a:hover:not(.active){
+    background-color: rgb(180, 136, 78);
+    color: aliceblue;
+    cursor: pointer;
+}

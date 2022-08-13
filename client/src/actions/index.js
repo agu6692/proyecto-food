@@ -26,9 +26,16 @@ export function filterRecipesByDiet(payload){
 }
 
 export function orderByName(payload){
-    console.log(payload)
+    
     return {
         type : "ORDER_BY_NAME",
+        payload
+    }
+}
+export function orderBySaludable(payload){
+   
+    return {
+        type : "ORDER_BY_SALUDABLE",
         payload
     }
 }

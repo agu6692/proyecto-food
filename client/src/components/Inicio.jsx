@@ -2,10 +2,11 @@ import React from 'react'
 import { Recetas } from './Recetas'
 import { useState,useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import {getRecipes,filterRecipesByDiet,orderByName} from "../actions/index"
+import {getRecipes,filterRecipesByDiet,orderByName,orderBySaludable} from "../actions/index"
 import { Paginacion } from './Paginacion'
 import { SearchBar } from './SearchBar'
 import { NavLink } from 'react-router-dom'
+import style from "../estilos/Inicio.module.css"
 
 export const Inicio = () => {
     const dispatch= useDispatch()
@@ -15,13 +16,21 @@ export const Inicio = () => {
     const[recetasPagina]= useState(9)
 
     const[orden,setOrden]= useState("")
-
+    const[saludable,setSaludable]= useState("")
+    const[loading,setLoading]=useState("Cargando recetas...")
+    
+    
+    
     useEffect(()=>{
       
       if(recipes.length < 1){
         dispatch(getRecipes())
-
+        
       }
+      else if(recipes.length > 1){
+        setLoading("")
+      }
+      
   },[])
 
     
@@ -47,16 +56,28 @@ export const Inicio = () => {
       dispatch(orderByName(e.target.value))
       setOrden(e.target.value)
     }
+    function handleSaludable(e){
+      dispatch(orderBySaludable(e.target.value))
+      setSaludable(e.target.value)
+    }
   return (
     <div>
+       <div className={style.nuevaReceta}>
        <NavLink  to={"/crearReceta"}>Cargar nueva receta!</NavLink>
-       <button onClick={e=>{handleClick(e)}}>Limpiar filtros</button>
+       </div>
        
-       <div>
+       <div className={style.filtros}>
+          <label>Az-Za</label>
           <select onChange={e => handleOrder(e)}>
               <option value="asc">ascendente</option>
               <option value="desc">descendente</option>
           </select>
+          <label>Nivel de saludable</label>
+          <select onChange={e => handleSaludable(e)}>
+              <option value="noSaludable">Menos Saludable</option>
+              <option value="saludable">Mas Saludable</option>
+          </select>
+          <label>Tipo de dieta</label>
           <select onChange={e => handleFilterDiets(e)}>
               <option value="todas">todas</option>
               <option value="gluten free">gluten free</option>
@@ -72,11 +93,17 @@ export const Inicio = () => {
               <option value="vegetarian">vegetarian</option>
               
           </select>
-          <SearchBar></SearchBar>
+          <button onClick={e=>{handleClick(e)}} className={style.button}>Limpiar filtros</button>
        </div>
-       <div>
-          
+       <div className={style.SearchBar}>
+
+          <SearchBar ></SearchBar>
+
+       </div>
           <Paginacion recetasPagina={recetasPagina} recipes={recipes.length} paginado={paginado}></Paginacion>
+       <div className={style.contenedor}>
+          
+          <div className={style.cartas}>
           {
            recetasActuales && recetasActuales.map(elemento =>{
                if(elemento.createDB===true){
@@ -89,7 +116,7 @@ export const Inicio = () => {
                 id={elemento.id}
                 name={elemento.Nombre} 
                 image={elemento.image}
-                
+                NivelHealth={elemento.NivelHealth}
                 tipoDieta={elemento.TipoDieta}
                 
 
@@ -99,8 +126,10 @@ export const Inicio = () => {
             )
            })
           }
+          </div>
           
        </div>
+       <p>{loading}</p>
        
     </div>
   )

@@ -14,10 +14,16 @@ function validate(input) {
     if (input.Resumen === null || input.Resumen === "") {
         errores.Resumen = "ingresa un resumen de tu receta"
     }
-    if (input.Nombre === null || input.Nombre === "") {
-        errores.Nombre = "ingresa un nombre"
+    
+    if (input.Nombre === null) {
+        errores.Nombre = "Ingrese el nombre"
 
+    }else if(!/^[A-Za-z\s]+$/.test(input.Nombre)){
+        errores.Nombre = "Ingrese un nombre valido, sin caracteres especiales ni numeros"
     }
+
+
+
     if (input.pasos === null || input.pasos === "") {
         errores.pasos = "ingresa el paso a paso de la receta"
     }
@@ -75,8 +81,9 @@ export const CrearReceta = () => {
 
 
 
-        if (input.Nombre && input.Resumen) {
+        if (input.Nombre && input.Resumen && /^[A-Za-z\s]+$/.test(input.Nombre) && input.Resumen.length > 0  && input.Nombre.length > 0)  {
             setDisable(false)
+        
         } else {
             setDisable(true)
         }

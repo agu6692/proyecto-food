@@ -1,0 +1,63 @@
+.nuevaReceta{
+    text-decoration: none;
+    height: 60px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+.nuevaReceta a{
+     padding: 12px;
+    text-decoration: none;
+    background-color: rgb(180, 136, 78);
+    color: aliceblue;
+    font-size: 13px;
+}
+.nuevaReceta a:hover{
+    background-color: rgb(145, 101, 43);
+    color: rgb(247, 243, 239);
+}
+.button{
+    text-decoration: none;
+    padding: 12px;
+    border: none;
+    background-color: rgb(180, 136, 78);
+    color: aliceblue;
+    
+}
+.button:hover{
+    background-color: rgb(145, 101, 43);
+    color: rgb(247, 243, 239);
+}
+.filtros{
+    margin: 25px;
+}
+.filtros select{
+    background: transparent;
+     border: none;
+     font-size: 14px;
+     height: 30px;
+     padding: 5px;
+     margin: 8px;
+     width: 160px;
+     border: solid 1px burlywood;
+}
+.SearchBar{
+    
+    text-align: center;
+    height: 70px;
+    margin: 10px;
+    border-bottom:solid 1px burlywood;
+}
+
+.contenedor{
+    display: inline;
+  flex-wrap: wrap;
+  text-align: center;
+  
+}
+.cartas{
+    align-items: center;
+    flex-wrap: wrap;
+    
+  
+}
