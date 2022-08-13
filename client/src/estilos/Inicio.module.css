@@ -11,6 +11,7 @@
     background-color: rgb(180, 136, 78);
     color: aliceblue;
     font-size: 13px;
+    border-radius: 5px;
 }
 .nuevaReceta a:hover{
     background-color: rgb(145, 101, 43);
@@ -22,6 +23,7 @@
     border: none;
     background-color: rgb(180, 136, 78);
     color: aliceblue;
+    border-radius: 5px;
     
 }
 .button:hover{
@@ -50,14 +52,16 @@
 }
 
 .contenedor{
-    display: inline;
-  flex-wrap: wrap;
-  text-align: center;
+   
+ 
   
 }
 .cartas{
-    align-items: center;
+    display: flex;
     flex-wrap: wrap;
+    margin-left: 70px;
+    justify-content: center;
+    
     
   
 }

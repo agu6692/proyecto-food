@@ -2,6 +2,7 @@ import React from 'react'
 import {searchByName} from "../actions/index"
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import style from "../estilos/search.module.css"
 
 export const SearchBar = () => {
     const dispatch= useDispatch()
@@ -12,9 +13,12 @@ export const SearchBar = () => {
         dispatch(searchByName(e.target.value))
     }
   return (
-    <div>
-        <label>Busca tu receta favorita!</label>
-        <input type="text" placeholder='Ingresa receta' onChange={e => handleName(e)}></input>
+    <div className={style.contenedor}>
+    <div className={style.search}>
+        <img src='/buscar.png'></img>
+        <input type="text" placeholder='Ingresa receta a buscar' onChange={e => handleName(e)}></input>
+    </div>
+
     </div>
   )
 }

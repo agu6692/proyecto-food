@@ -1,0 +1,32 @@
+.contenedor{
+    
+    text-align: center;
+    margin-top: 50px;
+}
+.formulario{
+    background-color: rgb(241, 228, 210);
+    color: rgb(126, 126, 126);
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 5px 5px 3px #c0996c;
+}
+.formulario textarea,input{
+    outline: none;
+    border: 0;
+    border: solid 1px rgb(207, 183, 149);
+    border-radius: 2px;
+    width: 400px;
+}
+.formulario input{
+    padding: 10px;
+}
+.formulario input:focus{
+    border-color: rgb(238, 160, 52);
+}
+
+
+.formulario p{
+    color: red;
+}

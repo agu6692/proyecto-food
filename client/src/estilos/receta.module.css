@@ -1,5 +1,26 @@
 .receta{
-    width: 20%;
+    width: 500px;
+    margin: 40px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 3px;
     
-    background-color: rgb(224, 206, 183);
+    background-color: rgb(241, 228, 210);
+
+    box-shadow: 7px 7px 5px #c9c4c4;
+}
+.button{
+    margin: 10px;
+}
+.button a{
+    background-color: rgb(180, 136, 78);
+    text-decoration: none;
+    color: aliceblue;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+.button a:hover{
+    background-color: rgb(145, 101, 43);
+    color: rgb(247, 243, 239);
 }

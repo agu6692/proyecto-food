@@ -11,6 +11,10 @@ export const Recetas = ({name,image,tipoDieta,id,NivelHealth}) => {
       <h4>{NivelHealth}</h4>
 
       <img src={image}></img>
+     <div className={style.button}>
+
+     <NavLink  state={id}  to={"/recetaDetalle"}>Detalles</NavLink>
+     </div>
 
       {tipoDieta.map((elemento,index)=>{
         return(
@@ -18,9 +22,7 @@ export const Recetas = ({name,image,tipoDieta,id,NivelHealth}) => {
           
         )
       })}
-
-     <NavLink  state={id}  to={"/recetaDetalle"}>Detalles</NavLink>
       
-      </div>
+    </div>
   )
 }

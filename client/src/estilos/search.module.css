@@ -1,0 +1,28 @@
+.contenedor{
+    display: flex;
+    justify-content: center;
+    margin-left: 200px;
+}
+
+
+.search{
+    padding: 15px;
+    
+    
+    width: 300px;
+    background-color: rgb(240, 218, 190);
+    display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.search img{
+    padding: 5px;
+   
+}
+
+.search input{
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    outline: none;
+}

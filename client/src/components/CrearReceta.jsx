@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 import { getDietas, postReceta } from "../actions"
 import { useDispatch, useSelector } from 'react-redux'
+import style from "../estilos/crear.module.css"
 
 
 
@@ -143,33 +144,36 @@ export const CrearReceta = () => {
 
     return (
         <div>
+            <div className={style.volver}>
             <NavLink to={"/inicio"}>Volver</NavLink>
+            </div>
+            <div className={style.contenedor}>
 
-            <h3>Crear--Receta</h3>
-            <form onSubmit={handleSubmit}>
+            
+            <form className={style.formulario} onSubmit={handleSubmit}>
                 <div>
-                    <label>Nombre</label>
+                    <h4>Nombre</h4>
                     <input onChange={e => handleChange(e)} type="text" value={input.Nombre} name="Nombre"></input>
                     <p>{errores.Nombre}</p>
                 </div>
                 <div>
-                    <label>Resumen</label>
+                    <h4>Resumen</h4>
                     <input onChange={e => handleChange(e)} type="text" value={input.Resumen} name="Resumen"></input>
                     <p>{errores.Resumen}</p>
                 </div>
                 <div>
-                    <label>Saludable</label>
-                    <input onChange={e => handleChange(e)} type="number" value={input.NivelHealth} name="NivelHealth"></input>
+                    <h4>Saludable</h4>
+                    <input onChange={e => handleChange(e)} type="number" max="100" min="1" value={input.NivelHealth} name="NivelHealth"></input>
                     <p>{errores.NivelHealth}</p>
                 </div>
                 <div>
-                    <label>Pasos</label>
+                    <h4>Pasos</h4>
 
                     <textarea name="pasos" rows="10" cols="50" onChange={e => handleChange(e)} value={input.pasos}>Write something here</textarea>
                     <p>{errores.pasos}</p>
                 </div>
                 <div>
-                    <label>Dietas</label>
+                    <h4>Dietas</h4>
                     <select onChange={(e) => handleSelect(e)}>
                         {dietas.map((diet) => (
                             <option key={diet.id}  >{diet.Nombre}</option>
@@ -196,7 +200,7 @@ export const CrearReceta = () => {
 
 
             </form>
-
+           </div>
 
         </div>
     )
