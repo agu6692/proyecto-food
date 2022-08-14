@@ -6,6 +6,7 @@
     border-radius: 3px;
     
     background-color: rgb(241, 228, 210);
+    color: rgb(126, 126, 126);
 
     box-shadow: 7px 7px 5px #c9c4c4;
 }
@@ -23,4 +24,17 @@
 .button a:hover{
     background-color: rgb(145, 101, 43);
     color: rgb(247, 243, 239);
+}
+
+.heatlh{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.heatlh img{
+    margin-left: 5px;
+}
+.heatlh h4{
+    padding-bottom: 2px;
+    font-size: 20px;
 }

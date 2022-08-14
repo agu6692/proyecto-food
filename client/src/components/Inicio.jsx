@@ -17,7 +17,7 @@ export const Inicio = () => {
 
     const[orden,setOrden]= useState("")
     const[saludable,setSaludable]= useState("")
-    const[loading,setLoading]=useState("Cargando recetas...")
+    
     
     
     
@@ -28,7 +28,7 @@ export const Inicio = () => {
         
       }
       else if(recipes.length > 1){
-        setLoading("")
+       
       }
       
   },[])
@@ -78,7 +78,7 @@ export const Inicio = () => {
               <option value="saludable">Mas Saludable</option>
           </select>
           <label>Tipo de dieta</label>
-          <select onChange={e => handleFilterDiets(e)}>
+          <select  onChange={e => handleFilterDiets(e)}>
               <option value="todas">todas</option>
               <option value="gluten free">gluten free</option>
               <option value="dairy free">dairy free</option>
@@ -105,7 +105,8 @@ export const Inicio = () => {
           
           <div className={style.cartas}>
           {
-           recetasActuales && recetasActuales.map(elemento =>{
+          
+           recetasActuales.length > 0 ? recetasActuales.map(elemento =>{
                if(elemento.createDB===true){
                 elemento.image="/receta.png"
                }
@@ -124,12 +125,13 @@ export const Inicio = () => {
                 
                 ></Recetas>
             )
-           })
+           }) :
+           <span>Receta no encontrada</span>
           }
           </div>
           
        </div>
-       <p>{loading}</p>
+      
        
     </div>
   )

@@ -104,9 +104,19 @@ const initialState = {
                     recetas: ordenados
                 }
             case "GET_BY_NAME":
-                return {
-                    ...state,
-                    recetas: action.payload
+                
+                if(action.payload[0] === "ERROR"){
+                    return {
+                        ...state,
+                        recetas: []
+                    }
+
+                }else{
+
+                    return {
+                        ...state,
+                        recetas: action.payload
+                    }
                 }
             case "POST_RECETA":
                 return{

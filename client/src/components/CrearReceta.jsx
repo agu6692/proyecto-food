@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
-import { getDietas, postReceta } from "../actions"
+import { getDietas, postReceta ,getRecipes} from "../actions"
 import { useDispatch, useSelector } from 'react-redux'
 import style from "../estilos/crear.module.css"
 
@@ -54,6 +54,7 @@ export const CrearReceta = () => {
     const [errores, setErrores] = useState({})
 
     const [mensajeBoton, setMensaje] = useState("")
+    const [estiloBoton, setEstilo] = useState("")
 
     const [disable, setDisable] = useState(true)
 
@@ -63,13 +64,16 @@ export const CrearReceta = () => {
 
 
     useEffect(() => {
+        
         dispatch(getDietas())
+        
     }, [])
 
 
 
     function handleChange(e) {
-
+        
+       
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -79,15 +83,15 @@ export const CrearReceta = () => {
             ...input,
             [e.target.name]: e.target.value
         }))
-
-
-
         if (input.Nombre && input.Resumen && /^[A-Za-z\s]+$/.test(input.Nombre) && input.Resumen.length > 0  && input.Nombre.length > 0)  {
             setDisable(false)
         
         } else {
             setDisable(true)
         }
+
+
+
 
 
 
@@ -109,21 +113,35 @@ export const CrearReceta = () => {
 
     function handleSubmit(e) {
         e.preventDefault()
+        if(input.NivelHealth>0 && input.NivelHealth < 101 && input.Nombre && input.Resumen){
+            dispatch(postReceta(input))
+            dispatch(getRecipes())
+            setEstilo("exito")
+            setMensaje("Receta cargada con exito")
+            setInput({
+                Nombre: "",
+                Resumen: "",
+                NivelHealth: "",
+                pasos: "",
+                dieta: []
+            })
+            setTimeout(function () {
+    
+                navigate("/inicio");
+            }, 3000
+            )
 
-        dispatch(postReceta(input))
-        setMensaje("Receta cargada con exito")
-        setInput({
-            Nombre: "",
-            Resumen: "",
-            NivelHealth: "",
-            pasos: "",
-            dieta: []
-        })
-        setTimeout(function () {
-
-            navigate("/inicio");
-        }, 3000
-        )
+        }else{
+            setEstilo("error")
+            setMensaje("error en los datos del formulario")
+            setInput({
+                Nombre: "",
+                Resumen: "",
+                NivelHealth: "",
+                pasos: "",
+                dieta: []
+            })
+        }
 
 
 
@@ -172,7 +190,7 @@ export const CrearReceta = () => {
                     <textarea name="pasos" rows="10" cols="50" onChange={e => handleChange(e)} value={input.pasos}>Write something here</textarea>
                     <p>{errores.pasos}</p>
                 </div>
-                <div>
+                <div className={style.dietas}>
                     <h4>Dietas</h4>
                     <select onChange={(e) => handleSelect(e)}>
                         {dietas.map((diet) => (
@@ -180,23 +198,24 @@ export const CrearReceta = () => {
                         ))}
 
                     </select>
-                    <ul>
+                    
                         {input.dieta.map((elemento, index) => {
                             return (
-                                <div key={index}>
-                                    <li >{elemento}</li>
-                                    <button onClick={() => handleDelete(elemento)}>X</button>
+                                <div  key={index}>
+                                    
+                                    <button className={style.boton} onClick={() => handleDelete(elemento)}>{elemento}</button>
                                 </div>
                             )
                         })}
 
-                    </ul>
+                   
 
 
                 </div>
 
                 <button type='submit' disabled={disable}>Cargar receta</button>
-                <p>{mensajeBoton}</p>
+                
+                <h3 className={style[estiloBoton]}>{mensajeBoton}</h3>
 
 
             </form>

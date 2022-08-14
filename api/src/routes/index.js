@@ -26,9 +26,12 @@ const apiInfo= async()=>{
               e.analyzedInstructions[0].steps.map((step)=> step.step),
               dieta: e.diets,
               TipoDieta: e.diets.map(elemento => {
-                return (
-                  {Nombre: elemento}
-                )
+               
+                  return (
+                    {Nombre: elemento}
+                  )
+
+               
             }),
               image: e.image,
               createDB: false
@@ -38,7 +41,11 @@ const apiInfo= async()=>{
          }
 
       })
-      
+      for(let i=0;i< info.length;i++){
+        if(info[i].vegetarian === true){
+          info[i].TipoDieta.push({Nombre:"vegetarian"})
+        }
+      }
       
         return info;
 }
@@ -65,6 +72,7 @@ router.get("/recipes",async(req,res)=>{
 
 
     let info= await apiInfo()
+    
     let infoDb= await dbInfo()
     let infoAlFront= info.concat(infoDb)
    
@@ -90,9 +98,9 @@ router.get("/recipes",async(req,res)=>{
               busqueda.push(infoAlFront[i])
            }
      }
-     console.log(busqueda)
+     
      if(busqueda.length < 1){
-       return res.status(500).send("palabra no encontrada")
+       return res.send(["ERROR"])
      }else{
        return res.status(200).send(busqueda)
  

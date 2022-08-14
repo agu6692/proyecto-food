@@ -30,3 +30,45 @@
 .formulario p{
     color: red;
 }
+
+.dietas select{
+    
+     border: none;
+     font-size: 14px;
+     height: 30px;
+     padding: 5px;
+     margin: 8px;
+     width: 160px;
+     border: solid 1px burlywood;
+}
+
+.dietas select:hover{
+    background-color: rgb(163, 130, 86);
+    color: aliceblue;
+}
+
+.boton{
+    width: 200px;
+    border: none;
+    border: solid 1px rgb(207, 183, 149);
+    background-color: rgb(163, 130, 86);
+    color: rgb(223, 223, 223);
+}
+
+.exito{
+    width: 500px;
+    height: 50px;
+    background-color:rgb(41, 202, 36);
+    color: azure;
+}
+
+.error{
+    width: 500px;
+    height: 50px;
+    background-color:rgb(187, 53, 53);
+    color: azure;
+}
+
+.volver{
+    background-color: aqua;
+}

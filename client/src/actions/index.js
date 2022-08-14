@@ -47,7 +47,8 @@ export function searchByName(name){
 
     try{
         var json = await axios.get(`http://localhost:3001/recipes?name=${name}`)
-
+        
+        
         return dispatch(
             {
                 type: "GET_BY_NAME",
@@ -57,7 +58,7 @@ export function searchByName(name){
     }
 
     catch(err){
-        console.log(err)
+        console.log("ERROR EN EL SERVIDOR")
     }
     
 }}
