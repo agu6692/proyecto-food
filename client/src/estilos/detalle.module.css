@@ -44,3 +44,21 @@
     padding-bottom: 2px;
     font-size: 20px;
 }
+.volver{
+    margin: 20px;
+}
+
+.boton{
+    text-decoration: none;
+    padding: 12px;
+    border: none;
+    background-color: rgb(180, 136, 78);
+    color: aliceblue;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.boton:hover{
+    background-color: rgb(145, 101, 43);
+    color: rgb(247, 243, 239);
+}

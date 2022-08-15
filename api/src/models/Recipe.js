@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     Resumen: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     NivelHealth:{

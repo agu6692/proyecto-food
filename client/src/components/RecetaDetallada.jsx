@@ -10,6 +10,7 @@ export const RecetaDetallada = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const id = location.state
+  
 
 
   useEffect(() => {
@@ -26,10 +27,13 @@ export const RecetaDetallada = () => {
       src = "/receta.png"
     }
   }
+  function handleVolver(){
+    receta=[]
+  }
   return (
     <div className={style.receta}>
-      <div>
-        <NavLink to={"/inicio"}>Volver</NavLink>
+      <div className={style.volver}>
+        <NavLink className={style.boton}  to={"/inicio"} onClick={handleVolver}>Volver</NavLink>
       </div>
       {
         receta.length > 0 ?

@@ -2,17 +2,29 @@
     height:100vh;
     width:100%;
     background-image: url(../img/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
    
     display: flex;
     align-items: center;
     justify-content: center;
    
 }
+
 .boton{
-    
-    padding:25px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    text-decoration: none;
+    padding: 30px;
     border: none;
+    background-color: rgb(145, 110, 62);
+    color: aliceblue;
     border-radius: 5px;
-    background-color: bisque;
+    border: solid 1px rgb(94, 72, 41) ;
     
+}
+.boton:hover{
+    background-color: rgb(107, 73, 29);
+    color: rgb(247, 243, 239);
 }

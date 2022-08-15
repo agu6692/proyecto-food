@@ -113,7 +113,7 @@ export const CrearReceta = () => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        if(input.NivelHealth>0 && input.NivelHealth < 101 && input.Nombre && input.Resumen){
+        if(input.NivelHealth>0 && input.NivelHealth < 101 && input.Nombre && input.Resumen && input.Nombre.length < 200){
             dispatch(postReceta(input))
             dispatch(getRecipes())
             setEstilo("exito")
@@ -133,7 +133,7 @@ export const CrearReceta = () => {
 
         }else{
             setEstilo("error")
-            setMensaje("error en los datos del formulario")
+            setMensaje("Error en los datos del formulario")
             setInput({
                 Nombre: "",
                 Resumen: "",
@@ -163,7 +163,7 @@ export const CrearReceta = () => {
     return (
         <div>
             <div className={style.volver}>
-            <NavLink to={"/inicio"}>Volver</NavLink>
+            <NavLink className={style.boton} to={"/inicio"}>Volver</NavLink>
             </div>
             <div className={style.contenedor}>
 
@@ -171,7 +171,7 @@ export const CrearReceta = () => {
             <form className={style.formulario} onSubmit={handleSubmit}>
                 <div>
                     <h4>Nombre</h4>
-                    <input onChange={e => handleChange(e)} type="text" value={input.Nombre} name="Nombre"></input>
+                    <input onChange={e => handleChange(e)} type="text" value={input.Nombre} name="Nombre" placeholder='Maximo 200 caracteres, no introducir simbolos'></input>
                     <p>{errores.Nombre}</p>
                 </div>
                 <div>
@@ -213,7 +213,7 @@ export const CrearReceta = () => {
 
                 </div>
 
-                <button type='submit' disabled={disable}>Cargar receta</button>
+                <button type='submit' className={style.boton} disabled={disable}>Cargar receta</button>
                 
                 <h3 className={style[estiloBoton]}>{mensajeBoton}</h3>
 

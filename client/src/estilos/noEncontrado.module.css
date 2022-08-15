@@ -1,0 +1,23 @@
+.volver{
+    display: flex;
+    
+    justify-content: center;
+    margin-top: 20%;
+    
+}
+.boton{
+    padding: 30px;
+    width: 45px;
+    text-decoration: none;
+    
+    border: none;
+    background-color: rgb(180, 136, 78);
+    color: aliceblue;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.boton:hover{
+    background-color: rgb(145, 101, 43);
+    color: rgb(247, 243, 239);
+}
